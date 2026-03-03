@@ -1,0 +1,186 @@
+{
+    "name": "nativephp/mobile-widgets",
+    "version": "1.0.0",
+    "description": "Home-screen widgets for NativePHP Mobile (Android + iOS)",
+    "namespace": "Widgets",
+    "keywords": [
+        "nativephp",
+        "widgets",
+        "android",
+        "ios"
+    ],
+    "category": "utilities",
+    "license": "MIT",
+    "pricing": {
+        "type": "free"
+    },
+    "author": {
+        "name": "NativePHP Plugins Workspace",
+        "email": "support@nativephp.com",
+        "url": "https://nativephp.com"
+    },
+    "homepage": "https://nativephp.com",
+    "repository": "https://github.com/NativePHP/NativePHP-Plugins",
+    "funding": [],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "icon": "resources/icon.png",
+    "screenshots": [],
+    "bridge_functions": [
+        {
+            "name": "Widget.SetData",
+            "android": "com.nativephp.plugins.mobile_widgets.WidgetBridgeFunctions.SetData",
+            "ios": "WidgetFunctions.SetData",
+            "android_params": [
+                "context"
+            ],
+            "description": "Save widget payload and trigger redraw"
+        },
+        {
+            "name": "Widget.ReloadAll",
+            "android": "com.nativephp.plugins.mobile_widgets.WidgetBridgeFunctions.ReloadAll",
+            "ios": "WidgetFunctions.ReloadAll",
+            "android_params": [
+                "context"
+            ],
+            "description": "Force reload all widget instances"
+        },
+        {
+            "name": "Widget.Configure",
+            "android": "com.nativephp.plugins.mobile_widgets.WidgetBridgeFunctions.Configure",
+            "ios": "WidgetFunctions.Configure",
+            "android_params": [
+                "context"
+            ],
+            "description": "Store widget configuration and scheduling options"
+        },
+        {
+            "name": "Widget.GetStatus",
+            "android": "com.nativephp.plugins.mobile_widgets.WidgetBridgeFunctions.GetStatus",
+            "ios": "WidgetFunctions.GetStatus",
+            "android_params": [
+                "context"
+            ],
+            "description": "Inspect current widget payload/config status"
+        }
+    ],
+    "android": {
+        "permissions": [
+            "android.permission.WAKE_LOCK"
+        ],
+        "repositories": [],
+        "dependencies": {
+            "implementation": [
+                "androidx.work:work-runtime-ktx:2.10.0"
+            ]
+        },
+        "activities": [],
+        "services": [],
+        "receivers": [],
+        "providers": []
+    },
+    "ios": {
+        "permissions": [],
+        "repositories": [],
+        "dependencies": {
+            "swift_packages": [],
+            "pods": []
+        },
+        "entitlements": {
+            "com.apple.security.application-groups": [
+                "group.${NATIVEPHP_APP_ID}.widgets"
+            ]
+        }
+    },
+    "assets": {
+        "android": {
+            "res/layout/widget_nativephp.xml": "res/layout/widget_nativephp.xml",
+            "res/xml/nativephp_widget_info.xml": "res/xml/nativephp_widget_info.xml",
+            "res/drawable/widget_bg.xml": "res/drawable/widget_bg.xml",
+            "res/drawable/widget_bg_compact.xml": "res/drawable/widget_bg_compact.xml",
+            "res/drawable/widget_bg_success.xml": "res/drawable/widget_bg_success.xml",
+            "res/drawable/widget_bg_warning.xml": "res/drawable/widget_bg_warning.xml",
+            "res/drawable/widget_bg_alert.xml": "res/drawable/widget_bg_alert.xml",
+            "res/values/widget_strings.xml": "res/values/widget_strings.xml"
+        },
+        "ios": {
+            "WidgetExtension/Info.plist": "Resources/WidgetExtension/Info.plist",
+            "WidgetExtension/NativePHPWidgets.entitlements": "Resources/WidgetExtension/NativePHPWidgets.entitlements",
+            "WidgetExtension/NativePHPWidget.swift": "Resources/WidgetExtension/NativePHPWidget.swift",
+            "WidgetExtension/NativePHPWidgetsBundle.swift": "Resources/WidgetExtension/NativePHPWidgetsBundle.swift",
+            "WidgetExtension/WidgetDataStore.swift": "Resources/WidgetExtension/WidgetDataStore.swift"
+        }
+    },
+    "secrets": {
+        "MOBILE_WIDGETS_ENABLE_BACKGROUND_WORKERS": {
+            "description": "Enable background worker support for periodic widget refresh",
+            "required": false
+        },
+        "MOBILE_WIDGETS_ENABLE_SCHEDULED_TASKS": {
+            "description": "Enable periodic scheduled widget refresh behavior",
+            "required": false
+        },
+        "MOBILE_WIDGETS_REFRESH_INTERVAL_MINUTES": {
+            "description": "Widget refresh interval in minutes (minimum 15)",
+            "required": false
+        },
+        "MOBILE_WIDGETS_APP_GROUP": {
+            "description": "Override the shared iOS app group used by the app and widget extension",
+            "required": false
+        },
+        "MOBILE_WIDGETS_IMAGE_KEY": {
+            "description": "Payload key used for widget image URL value",
+            "required": false
+        },
+        "MOBILE_WIDGETS_SUBTITLE_KEY": {
+            "description": "Payload key used for widget subtitle value",
+            "required": false
+        },
+        "MOBILE_WIDGETS_STATUS_KEY": {
+            "description": "Payload key used for widget status value (live, paused, error)",
+            "required": false
+        },
+        "MOBILE_WIDGETS_STATUS_LABEL_KEY": {
+            "description": "Payload key used for widget status label text",
+            "required": false
+        },
+        "MOBILE_WIDGETS_PROGRESS_KEY": {
+            "description": "Payload key used for widget progress percentage (0-100)",
+            "required": false
+        },
+        "MOBILE_WIDGETS_UPDATED_AT_KEY": {
+            "description": "Payload key used for widget updated-at text",
+            "required": false
+        },
+        "MOBILE_WIDGETS_STATE_TEXT_KEY": {
+            "description": "Payload key used for widget state text",
+            "required": false
+        },
+        "MOBILE_WIDGETS_STYLE": {
+            "description": "Widget style preset (card or compact)",
+            "required": false
+        },
+        "MOBILE_WIDGETS_SIZE": {
+            "description": "Widget size hint (small or medium)",
+            "required": false
+        },
+        "MOBILE_WIDGETS_VARIANT": {
+            "description": "Widget visual variant (default, success, warning, alert)",
+            "required": false
+        },
+        "MOBILE_WIDGETS_CONTENT_MODE": {
+            "description": "Widget content mode (compact, regular, detailed)",
+            "required": false
+        }
+    },
+    "events": [
+        "Nativephp\\MobileWidgets\\Events\\WidgetsCompleted"
+    ],
+    "service_provider": "Nativephp\\MobileWidgets\\WidgetsServiceProvider",
+    "hooks": {
+        "copy_assets": "nativephp:widgets:copy-assets",
+        "post_compile": "nativephp:widgets:post-compile"
+    }
+}
