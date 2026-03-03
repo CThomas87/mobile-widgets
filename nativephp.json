@@ -67,6 +67,7 @@
         }
     ],
     "android": {
+        "min_version": 26,
         "permissions": [
             "android.permission.WAKE_LOCK"
         ],
@@ -82,6 +83,7 @@
         "providers": []
     },
     "ios": {
+        "min_version": "16.0",
         "permissions": [],
         "repositories": [],
         "dependencies": {
@@ -96,21 +98,21 @@
     },
     "assets": {
         "android": {
-            "res/layout/widget_nativephp.xml": "res/layout/widget_nativephp.xml",
-            "res/xml/nativephp_widget_info.xml": "res/xml/nativephp_widget_info.xml",
-            "res/drawable/widget_bg.xml": "res/drawable/widget_bg.xml",
-            "res/drawable/widget_bg_compact.xml": "res/drawable/widget_bg_compact.xml",
-            "res/drawable/widget_bg_success.xml": "res/drawable/widget_bg_success.xml",
-            "res/drawable/widget_bg_warning.xml": "res/drawable/widget_bg_warning.xml",
-            "res/drawable/widget_bg_alert.xml": "res/drawable/widget_bg_alert.xml",
-            "res/values/widget_strings.xml": "res/values/widget_strings.xml"
+            "android/res/layout/widget_nativephp.xml": "res/layout/widget_nativephp.xml",
+            "android/res/xml/nativephp_widget_info.xml": "res/xml/nativephp_widget_info.xml",
+            "android/res/drawable/widget_bg.xml": "res/drawable/widget_bg.xml",
+            "android/res/drawable/widget_bg_compact.xml": "res/drawable/widget_bg_compact.xml",
+            "android/res/drawable/widget_bg_success.xml": "res/drawable/widget_bg_success.xml",
+            "android/res/drawable/widget_bg_warning.xml": "res/drawable/widget_bg_warning.xml",
+            "android/res/drawable/widget_bg_alert.xml": "res/drawable/widget_bg_alert.xml",
+            "android/res/values/widget_strings.xml": "res/values/widget_strings.xml"
         },
         "ios": {
-            "WidgetExtension/Info.plist": "Resources/WidgetExtension/Info.plist",
-            "WidgetExtension/NativePHPWidgets.entitlements": "Resources/WidgetExtension/NativePHPWidgets.entitlements",
-            "WidgetExtension/NativePHPWidget.swift": "Resources/WidgetExtension/NativePHPWidget.swift",
-            "WidgetExtension/NativePHPWidgetsBundle.swift": "Resources/WidgetExtension/NativePHPWidgetsBundle.swift",
-            "WidgetExtension/WidgetDataStore.swift": "Resources/WidgetExtension/WidgetDataStore.swift"
+            "ios/WidgetExtension/Info.plist": "Resources/WidgetExtension/Info.plist",
+            "ios/WidgetExtension/NativePHPWidgets.entitlements": "Resources/WidgetExtension/NativePHPWidgets.entitlements",
+            "ios/WidgetExtension/NativePHPWidget.swift": "Resources/WidgetExtension/NativePHPWidget.swift",
+            "ios/WidgetExtension/NativePHPWidgetsBundle.swift": "Resources/WidgetExtension/NativePHPWidgetsBundle.swift",
+            "ios/WidgetExtension/WidgetDataStore.swift": "Resources/WidgetExtension/WidgetDataStore.swift"
         }
     },
     "secrets": {

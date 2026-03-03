@@ -25,32 +25,9 @@ Parity methods:
 
 ## Requirements
 
-### Core
-
 - PHP: `^8.2`
 - NativePHP Mobile: `^3.0`
 - Plugin package: `nativephp/mobile-widgets`
-
-### Laravel
-
-- Use a Laravel version supported by your installed `nativephp/mobile` version.
-- In this workspace, the host app uses Laravel `^12.0`.
-
-### Vue / JavaScript (optional)
-
-- Vue is optional; only required if you call the JS bridge in a frontend app shell.
-- In this workspace, Vue `^3.x` is used.
-
-### Livewire (optional)
-
-- Livewire is optional; only required if you want widget actions in Livewire components.
-- The plugin itself does not require Livewire as a Composer dependency.
-
-### Android / iOS platform versions
-
-- This plugin targets Android + iOS through NativePHP Mobile.
-- Minimum OS versions come from your NativePHP Mobile project/toolchain configuration.
-- The plugin does not independently override your app’s min SDK / deployment target.
 
 ## Installation
 
@@ -65,6 +42,8 @@ composer require nativephp/mobile-widgets
 After install, activate by rebuilding/running your native targets so plugin hooks and assets are applied:
 
 ```bash
+php artisan native:plugin:register nativephp/mobile-widgets
+
 php artisan native:run android
 php artisan native:run ios
 ```
@@ -111,9 +90,9 @@ All bridges normalize responses into:
 
 ```json
 {
-    "ok": true,
-    "data": {},
-    "error": null
+  "ok": true,
+  "data": {},
+  "error": null
 }
 ```
 
@@ -121,13 +100,13 @@ Or on failure:
 
 ```json
 {
-    "ok": false,
-    "data": null,
-    "error": {
-        "code": "SOME_ERROR_CODE",
-        "message": "Human-readable message",
-        "recoverable": true
-    }
+  "ok": false,
+  "data": null,
+  "error": {
+    "code": "SOME_ERROR_CODE",
+    "message": "Human-readable message",
+    "recoverable": true
+  }
 }
 ```
 
@@ -252,28 +231,28 @@ Fixtures:
 ### Vue / JavaScript
 
 ```js
-import { widget } from '@nativephp/mobile-widgets';
+import { widget } from "@nativephp/mobile-widgets";
 
-await widget.execute({ title: 'Build Pipeline' });
+await widget.execute({ title: "Build Pipeline" });
 
 await widget.setData({
-    title: 'Build Pipeline',
-    subtitle: 'Production',
-    body: 'Deployment in progress.',
-    status: 'live',
-    status_label: 'Live',
-    progress: 68,
-    updated_at: 'Updated just now',
-    state_text: 'Healthy',
-    image_url: 'https://picsum.photos/640/320',
+  title: "Build Pipeline",
+  subtitle: "Production",
+  body: "Deployment in progress.",
+  status: "live",
+  status_label: "Live",
+  progress: 68,
+  updated_at: "Updated just now",
+  state_text: "Healthy",
+  image_url: "https://picsum.photos/640/320",
 });
 
 await widget.configure({
-    deep_link_path: '/widgets/example',
-    widget_style: 'card',
-    widget_size: 'medium',
-    widget_variant: 'warning',
-    widget_content_mode: 'regular',
+  deep_link_path: "/widgets/example",
+  widget_style: "card",
+  widget_size: "medium",
+  widget_variant: "warning",
+  widget_content_mode: "regular",
 });
 
 await widget.reloadAll();
@@ -290,8 +269,9 @@ The plugin exposes scheduling controls:
 
 How they are implemented:
 
-- Android uses WorkManager periodic work when both flags are true.
-- iOS stores configuration and refreshes Widget timelines, but does not run an equivalent long-running periodic worker from this plugin.
+- Android: periodic refresh depends on WorkManager execution windows, battery/OS policies, and process state; timing is best-effort, not exact.
+- iOS: this plugin does not provide an equivalent long-running periodic worker; it persists config/data and requests timeline reloads only.
+- Cross-platform: enabling these flags does not guarantee the same background behavior on Android and iOS.
 
 How to enable in configuration:
 
@@ -303,9 +283,12 @@ Widget::configure([
 ]);
 ```
 
-Important limitation:
+Safe fallback patterns:
 
-- Keep these flags disabled in production until NativePHP Mobile officially supports your required background worker/scheduled task lifecycle end-to-end for your target platform and app constraints.
+- Keep `background_workers_enabled=false` and `scheduled_tasks_enabled=false` for production by default.
+- Treat widgets as event-driven: call `Widget::setData(...)` + `Widget::reloadAll()` when app-visible events happen (app open, user action, successful API sync, completed job while app is active).
+- Provide a manual in-app refresh action that re-fetches data, writes widget payload, and triggers `reloadAll()`.
+- Show freshness in the widget payload (for example `updated_at`) so users can see when data was last updated.
 
 ## Production checklist
 
