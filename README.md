@@ -37,7 +37,7 @@ Install with Composer:
 composer require nativephp/mobile-widgets
 ```
 
-## Activate in NativePHP Mobile / Mobile Air
+## Activate in NativePHP Mobile
 
 After install, activate by rebuilding/running your native targets so plugin hooks and assets are applied:
 
@@ -48,7 +48,7 @@ php artisan native:run android
 php artisan native:run ios
 ```
 
-If you use Mobile Air plugin management, install/enable this plugin there and then run the same NativePHP build/run commands so the local native projects pick up changes.
+If you use NativePHP Mobile plugin management, install/enable this plugin there and then run the same NativePHP build/run commands so the local native projects pick up changes.
 
 ## Permissions
 
